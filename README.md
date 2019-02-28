@@ -2,6 +2,8 @@ Generator
 ==============================
 #### 基于 InfyOm Laravel Generator 修改。
 
+    具体请阅读文档 http://labs.infyom.com/laravelgenerator
+    根据文档，完成之覆盖laravel-generator包
 
  >### 安装到现有的Laravel项目中
 
