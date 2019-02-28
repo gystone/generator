@@ -1,0 +1,51 @@
+<?php
+
+
+namespace $NAMESPACE_SEARCH$;
+
+
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use Spatie\QueryBuilder\QueryBuilder;
+
+class $MODEL_NAME$Search extends $MODEL_NAME$
+{
+
+
+    //支持的关联关系(含关联嵌套)
+    private static $allowedIncludes = [
+    ];
+
+    //支持值过滤的字段,scope 过滤，自定义过滤
+    private static $allowedFilter = [
+        $SEARCH$
+    ];
+
+    //支持的排序字段
+    private static $allowedSortFields = [
+         $SEARCH$
+    ];
+
+    private static $allowedDisplayFields = [
+
+    ];
+
+
+    public function __construct()
+    {
+        Parent::__construct();
+        $parent = new parent();
+        $this->table = $parent->getTable();
+        unset($parent);
+    }
+
+    public static function getQuery(){
+        $queryBuilder = QueryBuilder::for(__CLASS__)
+            ->allowedFilters(self::$allowedFilter)
+            ->defaultSort(self::$allowedSortFields)
+            ->allowedIncludes(self::$allowedIncludes)
+            ->allowedFields(self::$allowedDisplayFields);
+        return $queryBuilder;
+    }
+
+
+}

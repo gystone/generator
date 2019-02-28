@@ -1,0 +1,101 @@
+<?php
+
+namespace $NAMESPACE_API_CONTROLLER$;
+
+use $NAMESPACE_API_REQUEST$\Create$MODEL_NAME$APIRequest;
+use $NAMESPACE_API_REQUEST$\Update$MODEL_NAME$APIRequest;
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
+use Illuminate\Http\Request;
+use $NAMESPACE_APP$\Http\Controllers\AppBaseController;
+use InfyOm\Generator\Criteria\LimitOffsetCriteria;
+use Prettus\Repository\Criteria\RequestCriteria;
+
+use $NAMESPACE_API_RESOURCE$\$MODEL_NAME$Resource;
+use $NAMESPACE_API_RESOURCE_COLLECTION$\$MODEL_NAME$ResourceCollection;
+
+use App\Traits\ApiResponse;
+use App\Traits\SortSearch;
+
+
+class $MODEL_NAME$APIController extends AppBaseController
+{
+    use ApiResponse,SortSearch;
+
+    private $$MODEL_NAME_CAMEL$Repository;
+    private $model;
+
+    public function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo,$MODEL_NAME$ $$MODEL_NAME_CAMEL$)
+    {
+        auth()->shouldUse('api');
+        $this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
+        $this->model = $$MODEL_NAME_CAMEL$;
+    }
+
+    public function index()
+    {
+        $list = $this->build($this->model)->getQueryPage($MODEL_NAME$Resource::class, $MODEL_NAME$ResourceCollection::class);
+        return $this->success($list);
+
+    }
+
+    public function store(Create$MODEL_NAME$APIRequest $request)
+    {
+        $input = $request->all();
+
+        $$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
+        if ($$MODEL_NAME_PLURAL_CAMEL$) {
+            return $this->success($$MODEL_NAME_PLURAL_CAMEL$->toArray());
+        } else {
+            return $this->failed('创建失败，请稍候重试');
+        }
+    }
+
+    public function show($id)
+    {
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
+
+        if (empty($$MODEL_NAME_CAMEL$)) {
+            return $this->failed('$MODEL_NAME_HUMAN$ not found');
+        }
+        return $this->success(new $MODEL_NAME$Resource($$MODEL_NAME_CAMEL$));
+    }
+
+    public function update($id, Update$MODEL_NAME$APIRequest $request)
+    {
+        $input = $request->all();
+
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
+
+        if (empty($$MODEL_NAME_CAMEL$)) {
+            return $this->failed('$MODEL_NAME_HUMAN$ not found');
+        }
+
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
+        if($$MODEL_NAME_CAMEL$){
+            return $this->success('修改成功');
+        }else{
+             return $this->failed('添加失败');
+        }
+
+
+    }
+
+    public function destroy($id)
+    {
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($id);
+
+        if (empty($$MODEL_NAME_CAMEL$)) {
+            return $this->failed('$MODEL_NAME_HUMAN$ not found');
+        }
+
+        $re = $$MODEL_NAME_CAMEL$->delete();
+        if($re){
+         return $this->success('删除成功');
+        }else{
+         return $this->failed('删除失败');
+        }
+    }
+
+
+}
