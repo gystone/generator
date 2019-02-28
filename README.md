@@ -105,4 +105,14 @@ Route::get('/home', 'HomeController@index');
 ```
 'add_on' => [ 'menu' => [ 'enabled' => true ] ] 
 ```
+---
+>## 生成器支持功能
+- [x] 生成模型(Model)
+- [x] 生成前后台控制器（控制器默认增、删、改、查方法）(Controller)
+- [x] 生成验证器(Request)
+- [x] 生成资源(Resource,Collection)
+- [x] 生成路由(Route)
+- [x] 生成数据表迁移（Migrate）并创建表
+- [x] 生成仓库（Repository）
+- [x] Api返回格式
 
