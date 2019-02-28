@@ -105,6 +105,9 @@ Route::get('/home', 'HomeController@index');
 ```
 'add_on' => [ 'menu' => [ 'enabled' => true ] ] 
 ```
+
+####3.访问
+ http://youhost/generator_builder
 ---
 >## 生成器支持功能
 - [x] 生成模型(Model)
