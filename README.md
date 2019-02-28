@@ -112,7 +112,10 @@ Route::get('/home', 'HomeController@index');
 ---
 >## 生成器支持功能
 - [x] 生成模型(Model)
-- [x] 生成前后台控制器（控制器默认增、删、改、查方法）(Controller)
+- [x] 生成前后台控制器(Controller)
+
+        控制器默认增、删、改、查方法,列表支持筛选，排序，是否分页
+        
 - [x] 生成验证器(Request)
 - [x] 生成资源(Resource,Collection)
 - [x] 生成路由(Route)
