@@ -14,7 +14,7 @@ class $MODEL_NAME$ResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'list' => $this->collection,
             'total' => $this->total(),
             'per_page' => $this->perPage(),
             'current_page' => $this->currentPage(),
